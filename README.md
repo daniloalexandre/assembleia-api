@@ -67,6 +67,11 @@ Ajuste as configurações do MySQL e Apache Kafka no arquivo __application.prope
 
 ## Considerações sobre o desenvolvimento do código 
 
+O versionamento de API adotado foi controle de versão no path da contexto (dev-friendly), por exemplo, `http://{domain}/v1/assembleia`. [Leia mais](https://thiagolima.blog.br/parte-4-versionando-apis-restful-b1dd33c65a9c)
+
+Pra esse projeto ainda não foram abordas implementações de escalonamento, contudo algumas soluções podem ser aplicadas, como por exemplo [Kubernetes] (https://spring.io/guides/gs/spring-boot-kubernetes/).
+
+
 O projeto encontra-se estruturado nos seguintes pacotes:
 
 ### async
@@ -126,6 +131,7 @@ Classes utilitárias para manipulação de estruturas de dados diversas.
 Contém os componentes clientes para consumo de serviços de terceiros. Desenvolvido usando Spring Reactive
 
 Observação: O componente WebClient do spring empregado na solução é uma alternativa ao RestTemplate. [Veja mais](https://www.baeldung.com/spring-5-webclient)
+
 
 
 ## Histórico de lançamentos
