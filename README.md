@@ -72,6 +72,7 @@ O projeto encontra-se estruturado nos seguintes pacotes:
 ### async
 
 Contém os compoentes de tasks assincornas, para controle das sessões de votação. Desenvolvidos com Spring Scheduling.
+
 Observação: Outras soluções poderiam ser utilizadas, como o uso direto da classe Timer do JAVA. A adoção do Spring Scheduling foi pela facilidade de configuração do pool de threads.
 
 ### config
@@ -101,6 +102,7 @@ Contém os componentes que mapeiam as entidades de DTO em entidades de negócio 
 ### message
 
 Contém os serviços de mensageria. Desenvolvidos com [Spring Kafka](https://spring.io/projects/spring-kafka) 
+
 Observação: Outros serviços de mesageria foram analizados, como por exemplo o RabbitMQ. A adoção do Kafka se deu pela simplicidade de configuração.
 
 ### model
@@ -122,6 +124,7 @@ Classes utilitárias para manipulação de estruturas de dados diversas.
 ### webclient
 
 Contém os componentes clientes para consumo de serviços de terceiros. Desenvolvido usando Spring Reactive
+
 Observação: O componente WebClient do spring empregado na solução é uma alternativa ao RestTemplate. [Veja mais](https://www.baeldung.com/spring-5-webclient)
 
 
