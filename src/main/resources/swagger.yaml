@@ -239,6 +239,10 @@ paths:
           description: "Not Acceptable"
           schema:
             $ref: "#/definitions/ErroResponseNotAcceptableVoto"
+        "424":
+          description: "Failed Dependency"
+          schema:
+            $ref: "#/definitions/ErroResponseFailedDependencyVoto"
     get:
       tags:
       - "votação"
@@ -502,6 +506,21 @@ definitions:
           type: "string"
         example: ["Voto já computado",
                   "Associado com cpf 12345678910 não autorizado"]
+  ErroResponseFailedDependencyVoto:
+    type: "object"
+    required:
+    - "timestamp"
+    - "errors"
+    properties:
+      timestamp:
+        type: "string"
+        format: "yyyy-MM-ddThh:mm:ss.SSSSSSS"
+        example: "2021-03-08T00:52:40.8247272"
+      errors:
+        type: "array"
+        items:
+          type: "string"
+        example: ["Não foi possível se comunicar com serviços de terceiros."]
   VotacaoResultadoResponse:
     type: "object"
     required:

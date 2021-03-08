@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.example.exception.AccessDeniedException;
 import br.com.example.exception.DataIntegrityException;
 import br.com.example.exception.ResourceNotFoundException;
+import br.com.example.exception.ThirdPartException;
 import br.com.example.exception.UnbaleVoteException;
 import br.com.example.l10n.APIMessages;
 import br.com.example.model.Votacao;
@@ -27,7 +28,7 @@ public class VotoServiceImpl implements VotoService {
 
 	@Autowired
 	private VotoRepository repository;
-	
+
 	@Autowired
 	private AssociadoWebClient webClient;
 
@@ -52,21 +53,26 @@ public class VotoServiceImpl implements VotoService {
 	 * @see VotoService
 	 */
 	@Override
-	public Voto save(Voto voto) throws DataIntegrityException, UnbaleVoteException {
-		
+	public Voto save(Voto voto) throws DataIntegrityException, UnbaleVoteException, ThirdPartException {
+
 		Voto votoDB = repository.findByCPFAndVotacaoId(voto.getCpf(), voto.getVotacao().getId());
-		if(votoDB != null) 
+		if (votoDB != null)
 			throw new UnbaleVoteException(APIMessages.VOTO_ALREADY_COMPUTED.getCode());
-		
+
 		if (voto.getTimestamp().isAfter(voto.getVotacao().getPrazo()))
 			throw new DataIntegrityException(APIMessages.VOTO_EXPIRED_PERIOD.getCode());
 		
-		AssociadoResponse response = webClient.consultaAssociado(voto.getCpf());	
-		if(response.getStatus().contentEquals(AssociadoResponse.UNABLE_TO_VOTE))
+		AssociadoResponse response;
+		try {
+			response = webClient.consultaAssociado(voto.getCpf());
+		}catch (Exception e) {
+			throw new ThirdPartException(APIMessages.THIRD_PART_ERROR.getCode());
+		}		
+		if (response != null && response.getStatus().contentEquals(AssociadoResponse.UNABLE_TO_VOTE))
 			throw new UnbaleVoteException(APIMessages.ASSOCIADO_UNABLE.getCode(), voto.getCpf());
-		
+
 		Voto savedVoto = repository.save(voto);
-		
+
 		return savedVoto;
 	}
 
@@ -76,8 +82,8 @@ public class VotoServiceImpl implements VotoService {
 	@Override
 	public void delete(int id) throws ResourceNotFoundException {
 		if (repository.existsById(id)) {
-		    repository.deleteById(id);
-		}else {
+			repository.deleteById(id);
+		} else {
 			throw new ResourceNotFoundException(APIMessages.VOTO_NOT_FOUND.getCode(), id);
 		}
 	}
@@ -91,15 +97,15 @@ public class VotoServiceImpl implements VotoService {
 	}
 
 	/**
-	 * @throws AccessDeniedException 
+	 * @throws AccessDeniedException
 	 * @see VotoService
 	 */
 	@Override
 	public Map<Boolean, BigInteger> countVotos(Votacao votacao) throws AccessDeniedException {
-		
-		if(votacao.getPrazo().isAfter(LocalDateTime.now()))
+
+		if (votacao.getPrazo().isAfter(LocalDateTime.now()))
 			throw new AccessDeniedException(APIMessages.VOTACAO_NOT_EXPIRED.getCode());
-			
+
 		return repository.countVotos(votacao);
 	}
 

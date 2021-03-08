@@ -29,6 +29,7 @@ import br.com.example.dto.VotoResponseDTO;
 import br.com.example.exception.AccessDeniedException;
 import br.com.example.exception.DataIntegrityException;
 import br.com.example.exception.ResourceNotFoundException;
+import br.com.example.exception.ThirdPartException;
 import br.com.example.exception.UnbaleVoteException;
 import br.com.example.mapper.VotacaoMapper;
 import br.com.example.mapper.VotoMapper;
@@ -103,7 +104,7 @@ public class VotacaoController {
 	}
 
 	@GetMapping(value = "/{id}/votos")
-	public ResponseEntity<List<VotoResponseDTO>> getVotosById(@PathVariable int id){
+	public ResponseEntity<List<VotoResponseDTO>> getVotosById(@PathVariable int id) {
 
 		List<Voto> votos = votoService.getByVotacaoId(id);
 		List<VotoResponseDTO> votoResponseDTOs = new ArrayList<VotoResponseDTO>();
@@ -115,7 +116,8 @@ public class VotacaoController {
 
 	@PostMapping(value = "/{id}/votos")
 	public ResponseEntity<VotoResponseDTO> saveVoto(@Valid @RequestBody VotoRequestDTO votoRequestDTO,
-			@PathVariable int id) throws ResourceNotFoundException, DataIntegrityException, UnbaleVoteException {
+			@PathVariable int id)
+			throws ResourceNotFoundException, DataIntegrityException, UnbaleVoteException, ThirdPartException {
 
 		Votacao votacao = votacaoService.get(id);
 		Voto voto = VotoMapper.INSTANCE.toEntity(votoRequestDTO);

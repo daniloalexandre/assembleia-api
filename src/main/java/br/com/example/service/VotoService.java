@@ -7,6 +7,7 @@ import java.util.Map;
 import br.com.example.exception.AccessDeniedException;
 import br.com.example.exception.DataIntegrityException;
 import br.com.example.exception.ResourceNotFoundException;
+import br.com.example.exception.ThirdPartException;
 import br.com.example.exception.UnbaleVoteException;
 import br.com.example.model.Votacao;
 import br.com.example.model.Voto;
@@ -40,7 +41,7 @@ public interface VotoService {
 	 * @throws DataIntegrityException Caso a votação associada ao voto já tenha sido encerrada 
 	 * @throws UnbaleVoteException Caso o voto já tenha sido computado anteriormente ou associado não tenha autorização de votar
 	 */
-	public Voto save(Voto voto)  throws DataIntegrityException, UnbaleVoteException;
+	public Voto save(Voto voto)  throws DataIntegrityException, UnbaleVoteException, ThirdPartException;
 	
 	/**
 	 * Remove um voto com base no identificador informado 

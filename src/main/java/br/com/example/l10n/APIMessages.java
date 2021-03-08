@@ -13,6 +13,7 @@ public enum APIMessages implements Message {
 	ASSOCIADO_NOT_FOUND("api.message.associado.not_found"),
 	ASSOCIADO_UNABLE("api.message.associado.unable"),
 	PAUTA_NOT_FOUND("api.message.pauta.not_found"),
+	THIRD_PART_ERROR("api.message.third_part.error"),
 	VOTACAO_NOT_EXPIRED("api.message.votacao.not_expired"),
 	VOTACAO_NOT_FOUND("api.message.votacao.not_found"),
 	VOTO_ALREADY_COMPUTED("api.message.voto.already_computed"),

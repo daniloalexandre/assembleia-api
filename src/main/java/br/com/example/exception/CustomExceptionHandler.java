@@ -101,6 +101,24 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<ErrorResponse>(errorResponse, new HttpHeaders(), HttpStatus.FORBIDDEN);
 
 	}
+	
+	/**
+	 * Processa exceções de requisição de acesso não permitido à informações.
+	 * @param ex A exceção relativa ao acesso não permitido
+	 * @param request A requisição
+	 * @return Mensagem de erro padrão para exceções relativas ao acesso.
+	 */
+	@ExceptionHandler(value = {ThirdPartException.class })
+	protected ResponseEntity<ErrorResponse> handleThirdPartException(ThirdPartException ex, WebRequest request) {
+		
+		String message = messageSourceSetup.messageSource().getMessage(ex.getMessage(), ex.getArgs(), null);
+		log.error(message);
+		ErrorResponse errorResponse = new ErrorResponse();
+		errorResponse.addError(message);
+
+		return new ResponseEntity<ErrorResponse>(errorResponse, new HttpHeaders(), HttpStatus.FAILED_DEPENDENCY);
+
+	}
 
 	/**
 	 * Sobscreve o handler que processa as exceções que ocorrem durante a validação de DTOs.
