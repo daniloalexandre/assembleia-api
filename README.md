@@ -1,7 +1,7 @@
 # Assembleia API
 > API Restful solicitada em avaliação técnica. Desenvolvida em SpringBoot
 
-A API é composta de serviços para gerência de votações em assembléias. Os serviços cobre o fluxo padrão: Cadastro de pauta, abertura de sessão de votação, registro de votos, encerramento da votação e emissão de resultado.
+A API é composta de serviços para gerência de votações em assembléias. Os serviços suportam o fluxo padrão: Cadastro de pauta, abertura de sessão de votação, registro de votos, encerramento da votação e emissão de resultado.
 
 ## Pré-Requisitos
 
