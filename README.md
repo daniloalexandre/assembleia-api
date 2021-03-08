@@ -69,7 +69,7 @@ Ajuste as configurações do MySQL e Apache Kafka no arquivo __application.prope
 
 O versionamento de API adotado foi controle de versão no path da contexto (dev-friendly), por exemplo, `http://{domain}/v1/assembleia`. [Leia mais](https://thiagolima.blog.br/parte-4-versionando-apis-restful-b1dd33c65a9c)
 
-Pra esse projeto ainda não foram abordas implementações de escalonamento, contudo algumas soluções podem ser aplicadas, como por exemplo [Kubernetes] (https://spring.io/guides/gs/spring-boot-kubernetes/).
+Pra esse projeto ainda não foram abordas implementações para escalonamento de requisições, contudo algumas soluções podem ser aplicadas, como por exemplo [Kubernetes] (https://spring.io/guides/gs/spring-boot-kubernetes/).
 
 
 O projeto encontra-se estruturado nos seguintes pacotes:
