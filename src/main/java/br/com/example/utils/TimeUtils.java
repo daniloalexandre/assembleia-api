@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
  * @author Danilo Alexandre
  *
  */
-public class TimeUitls {
+public class TimeUtils {
 
 	public static ZonedDateTime addMinutesFromNow(long minutes) {
 		minutes = minutes > 0 ? minutes : 1;

@@ -22,7 +22,7 @@ public class VotingServiceImpl implements VotingService {
 	private VotingRepository repository;
 
 	@Autowired
-	private VotingTasks votingTask;
+	private VotingTasks votingTasks;
 
 	/**
 	 * @see VotingService
@@ -48,7 +48,7 @@ public class VotingServiceImpl implements VotingService {
 	public Voting save(Agenda agenda, long duration) {
 
 		Voting voting = Voting.createVoting(agenda, duration);
-		votingTask.processResultAfterMinutes(voting, duration);
+		votingTasks.processResultAfterMinutes(voting, duration);
 		return repository.save(voting);
 	}
 

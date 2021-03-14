@@ -40,6 +40,6 @@ public class Agenda {
 	private String description;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "agenda")
-	private List<Voting> elections;
+	private List<Voting> votings;
 
 }

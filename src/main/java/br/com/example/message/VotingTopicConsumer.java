@@ -34,7 +34,7 @@ public class VotingTopicConsumer {
 		log.info("key: {}", payload.key());
 		log.info("Headers: {}", payload.headers());
 		log.info("Partion: {}", payload.partition());
-		log.info("Order: {}", payload.value());
+		log.info("Agenda: {}", payload.value());
 
 	}
 

@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.example.utils.TimeUitls;
+import br.com.example.utils.TimeUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -49,10 +49,10 @@ public class Voting {
 	private List<Vote> votes;
 
 	public static Voting createVoting(Agenda agenda, long deadline) {
-		Voting election = new Voting();
-		election.setAgenda(agenda);
-		election.setDeadline(TimeUitls.addMinutesFromNow(deadline));
-		return election;
+		Voting voting = new Voting();
+		voting.setAgenda(agenda);
+		voting.setDeadline(TimeUtils.addMinutesFromNow(deadline));
+		return voting;
 	}
 
 }
