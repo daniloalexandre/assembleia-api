@@ -19,11 +19,11 @@ public class ThirdPartException extends Exception implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 6315442866689556075L;
-	
+
 	private String message;
 	private Object[] args;
 
-	public ThirdPartException(String message, Object ...args) {
+	public ThirdPartException(String message, Object... args) {
 		super(message);
 		this.message = message;
 		this.args = args;

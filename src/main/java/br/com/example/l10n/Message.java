@@ -7,9 +7,10 @@ package br.com.example.l10n;
  *
  */
 public interface Message {
-	
+
 	/**
 	 * Retorna o código associado a uma mensagem
+	 * 
 	 * @return o valor do código
 	 */
 	public String getCode();

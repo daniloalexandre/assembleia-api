@@ -1,6 +1,7 @@
 package br.com.example.utils;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
 /**
  * Classe utilitária para tratar de cálculos com o tempo
  * 
@@ -8,13 +9,12 @@ import java.time.LocalDateTime;
  *
  */
 public class TimeUitls {
-	
-	
-	public static LocalDateTime addMinutesFromNow(long minutes) {
+
+	public static ZonedDateTime addMinutesFromNow(long minutes) {
 		minutes = minutes > 0 ? minutes : 1;
-		return LocalDateTime.now().plusMinutes(minutes);
+		return ZonedDateTime.now().plusMinutes(minutes);
 	}
-	
+
 	public static long minutesInMillis(long minutes) {
 		return minutes * 60 * 1000;
 	}

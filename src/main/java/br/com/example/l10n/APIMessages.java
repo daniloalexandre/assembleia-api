@@ -10,20 +10,20 @@ import lombok.Getter;
  */
 @Getter
 public enum APIMessages implements Message {
-	ASSOCIADO_NOT_FOUND("api.message.associado.not_found"),
-	ASSOCIADO_UNABLE("api.message.associado.unable"),
-	PAUTA_NOT_FOUND("api.message.pauta.not_found"),
+	AFFILIATED_NOT_FOUND("api.message.affiliated.not_found"),
+	AFFILIATED_UNABLE("api.message.affiliated.unable"),
+	AGENDA_NOT_FOUND("api.message.agenda.not_found"),
 	THIRD_PART_ERROR("api.message.third_part.error"),
-	VOTACAO_NOT_EXPIRED("api.message.votacao.not_expired"),
-	VOTACAO_NOT_FOUND("api.message.votacao.not_found"),
-	VOTO_ALREADY_COMPUTED("api.message.voto.already_computed"),
-	VOTO_EXPIRED_PERIOD("api.message.voto.expired_period"),
-	VOTO_NOT_FOUND("api.message.voto.not_found"),
+	VOTING_NOT_FOUND("api.message.voting.not_found"),
+	VOTE_ALREADY_COMPUTED("api.message.vote.already_computed"),
+	VOTE_EXPIRED_PERIOD("api.message.vote.expired_period"),
+	VOTE_NOT_FOUND("api.message.vote.not_found"),
 	;
 	
-	APIMessages(String code) {
+	private APIMessages(String code) {
 		this.code = code;
 	}
+	
 	private String code;
 	
 	

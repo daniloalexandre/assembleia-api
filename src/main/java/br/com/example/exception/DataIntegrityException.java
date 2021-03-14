@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import lombok.Getter;
 import lombok.Setter;
+
 /**
  * Exceção de integridade de dados
  * 
@@ -22,7 +23,7 @@ public class DataIntegrityException extends Exception implements Serializable {
 	private String message;
 	private Object[] args;
 
-	public DataIntegrityException(String message, Object ...args) {
+	public DataIntegrityException(String message, Object... args) {
 		super(message);
 		this.message = message;
 		this.args = args;
