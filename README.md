@@ -5,55 +5,29 @@ A API é composta de serviços para gerência de votações em assembléias. Os 
 
 ## Pré-Requisitos
 
-JAVA 8+ [Download](https://www.java.com/pt-BR/)
+[GIT](https://git-scm.com/)
 
-MAVEN 3.6+ [Download](https://maven.apache.org/download.cgi)
+[DOCKER](https://www.docker.com/)
 
-MYSQL 5.5+ [Download](https://www.mysql.com/downloads/)
+[DOCKER COMPOSE](https://docs.docker.com/compose/gettingstarted/)
 
-APACHE ZOOKEEPER 3.6+ [Download](http://zookeeper.apache.org/releases.html#download)
-
-APACHE KAFKA 2.7+ [Download](https://kafka.apache.org/downloads)
-
-## Recomendado
-
-SWAGGER [LINK](https://swagger.io/) 
-
-Swagger foi uma das ferramentas usada para Design e Teste da API. O arquivo swagger.yaml encontra-se [AQUI](https://github.com/daniloalexandre/assembleia-api/blob/main/src/main/resources/swagger.yaml) 
-
-## Instalação
-
-Após efetuar o clone do projeto para o diretório de sua escolha, atravás do prompt de comando, acessa a raiz desse diretório e execute:
-
-```sh
-mvn install
-```
-
-## Testes
-
-Para executar os testes unitários e de integração, no diretório raiz do projeto, através do prompt de compando, faça:
-
-```sh
-mvn test
-```
 
 ## Execução
 
-Supondo que todos os pré-requisitos esteja instalados e o comando __mvn install__ já foi executado, no diretório raiz do projeto, através do prompt de comando, faça:
+Tudo que você precisa fazer para excutar é:
 
-```sh
-mvn exec:java -Dexec.mainClass="br.com.example.AssembleiaApiApplication"
+```
+git clone https://github.com/daniloalexandre/assembleia-api
+cd assembleia-api
+docker-compose up -d
+
 ```
 
-ATENÇÃO: as configurações de execução estão no arquivo __application.properties__ localizado no diretório __/resources__ do projeto. Os valores definidos para conexão ao MySQL e uso do Apache KAFKA são padrões. Lembre-se de ajusta-los de acordo com seu ambiente de execução.
+## Uso
 
-## Exemplo de uso
+O fluxo padrão inicia com a criação de uma Pauta, segue para o cadastro de uma votação, inicia-se os cadastros de votos, finaliza-se com a emissão de resultado de votação.
 
-O fluxo padrão de uso se inicia com o cadastro de Pautas __(POST /pautas)__, abertura de votação __(POST /votacoes)__, seguido do registro de voto __(POST /votacoes/{idVotacao}/votos)__ . 
-
-O encerramento da votação é automático. Após o encerramento, O resultado da votação pode ser obtido através de end-point __(GET /votacoes/{idVotacao})__ . Ainda, um serviço de mensageria envia o resultado para os consumidores no tópico __votacao.resultado__
-
-Para mais informações sobre outros end-points, acesse o arquivo [swagger.yaml](https://github.com/daniloalexandre/assembleia-api/blob/main/src/main/resources/swagger.yaml)
+Você pode usar os end-points associados a cada etapa do fluxo através do link [http://localhost:8081/v1/assembleia/swagger-ui.html](http://localhost:8081/v1/assembleia/swagger-ui.html). Lá existem mais detalhes sobre cada end-point existente.
 
 ## Configuração para Desenvolvimento
 
@@ -69,16 +43,11 @@ Ajuste as configurações do MySQL e Apache Kafka no arquivo __application.prope
 
 O versionamento de API adotado foi controle de versão no path da contexto (dev-friendly), por exemplo, `http://{domain}/v1/assembleia`. [Leia mais](https://thiagolima.blog.br/parte-4-versionando-apis-restful-b1dd33c65a9c)
 
-Pra esse projeto ainda não foram abordas implementações para escalonamento de requisições, contudo algumas soluções podem ser aplicadas, como por exemplo [Kubernetes] (https://spring.io/guides/gs/spring-boot-kubernetes/).
-
-
 O projeto encontra-se estruturado nos seguintes pacotes:
 
 ### async
 
-Contém os compoentes de tasks assincornas, para controle das sessões de votação. Desenvolvidos com Spring Scheduling.
-
-Observação: Outras soluções poderiam ser utilizadas, como o uso direto da classe Timer do JAVA. A adoção do Spring Scheduling foi pela facilidade de configuração do pool de threads.
+Contém os compoentes de tasks assincronas do sistema, implementadas com uso de Timer do JAVA. 
 
 ### config
 
@@ -107,8 +76,6 @@ Contém os componentes que mapeiam as entidades de DTO em entidades de negócio 
 ### message
 
 Contém os serviços de mensageria. Desenvolvidos com [Spring Kafka](https://spring.io/projects/spring-kafka) 
-
-Observação: Outros serviços de mesageria foram analizados, como por exemplo o RabbitMQ. A adoção do Kafka se deu pela simplicidade de configuração.
 
 ### model
 
