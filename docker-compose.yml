@@ -24,17 +24,6 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
-  kafdrop:
-    image: obsidiandynamics/kafdrop:latest
-    networks: 
-      - assembleia-network
-    depends_on:
-      - kafka
-    ports:
-      - 19000:9000
-    environment:
-      KAFKA_BROKERCONNECT: kafka:29092
-      
   mysqlsrv:
     image: mysql
     environment:
@@ -47,13 +36,6 @@ services:
     networks:
       - assembleia-network
 
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080
-    networks:
-      - assembleia-network
-  
   assembleiasrv:
     build:
       context: .
